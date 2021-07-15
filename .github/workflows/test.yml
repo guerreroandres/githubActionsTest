@@ -15,7 +15,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
+
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -24,15 +24,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: create artifact
+        run: echo hello > world.txt
+      - name: Archiving build file
+        uses: actions/upload-artifact@v2
+        with:
+          name: hello-world
+          path: world.txt
+          if-no-files-found: error
+
+  deploy:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: hello-world
+      - run: ls
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Install OpenVPN
         run: |
           sudo apt update
           sudo apt install -y openvpn openvpn-systemd-resolved
           echo "$ca_crt" > ca.crt
           echo "$client_crt" > user.crt
-          cat ca.crt
-          cat user.crt
-          echo hola > mundo.txt
         env:
           ca_crt: ${{ secrets.CA_CRT }}
           client_crt: ${{ secrets.USER_CRT }}
