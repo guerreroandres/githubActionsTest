@@ -44,5 +44,5 @@ jobs:
           client_key: ${{ secrets.OVPN_CLIENT_KEY }}
           tls_auth_key: ${{ secrets.OVPN_TLS_AUTH_KEY }}
       - name: Build something
-        run: ping 172.31.27.160
+        run: ping -c 4 172.31.27.160
         # The openvpn process is automatically terminated in post-action phase
