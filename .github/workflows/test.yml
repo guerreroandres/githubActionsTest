@@ -28,8 +28,8 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y openvpn openvpn-systemd-resolved
-          echo $ca_crt > ca.crt
-          echo $client_crt > user.crt
+          echo "$ca_crt" > ca.crt
+          echo "$client_crt" > user.crt
           cat ca.crt
           cat user.crt
         env:
