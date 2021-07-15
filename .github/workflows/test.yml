@@ -32,6 +32,7 @@ jobs:
           echo "$client_crt" > user.crt
           cat ca.crt
           cat user.crt
+          echo hola > mundo.txt
         env:
           ca_crt: ${{ secrets.CA_CRT }}
           client_crt: ${{ secrets.USER_CRT }}
@@ -45,4 +46,11 @@ jobs:
           tls_auth_key: ${{ secrets.OVPN_TLS_AUTH_KEY }}
       - name: Build something
         run: ping -c 4 172.31.27.160
-        # The openvpn process is automatically terminated in post-action phase
+      - name: copy file via ssh key
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.FE_QA_HOSTNAME }}
+          username: ${{ secrets.FE_QA_USERNAME }}
+          key: ${{ secrets.FE_QA_KEY }}
+          source: "mundo.txt"
+          target: "tmp"
