@@ -53,4 +53,4 @@ jobs:
           username: ${{ secrets.FE_QA_USERNAME }}
           key: ${{ secrets.FE_QA_KEY }}
           source: "mundo.txt"
-          target: "tmp"
+          target: "/tmp"
