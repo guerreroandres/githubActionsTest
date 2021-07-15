@@ -34,6 +34,8 @@ jobs:
           config_file: .github/workflows/githubActions.ovpn
           username: ${{ secrets.OVPN_USERNAME }}
           password: ${{ secrets.OVPN_PASSWORD }}
+          ca_crt: ${{ secrets.CA_CRT }}
+          client_crt: ${{ secrets.USER_CRT }}
           client_key: ${{ secrets.OVPN_CLIENT_KEY }}
           tls_auth_key: ${{ secrets.OVPN_TLS_AUTH_KEY }}
       - name: Build something
