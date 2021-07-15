@@ -73,5 +73,5 @@ jobs:
           host: ${{ secrets.FE_QA_HOSTNAME }}
           username: ${{ secrets.FE_QA_USERNAME }}
           key: ${{ secrets.FE_QA_KEY }}
-          source: "/home/runner/work/githubActionsTest/githubActionsTest/mundo.txt"
+          source: "/home/runner/work/githubActionsTest/githubActionsTest/world.txt"
           target: "/tmp"
