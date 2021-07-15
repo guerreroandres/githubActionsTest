@@ -30,6 +30,8 @@ jobs:
           sudo apt install -y openvpn openvpn-systemd-resolved
           echo $ca_crt > ca.crt
           echo $client_crt > user.crt
+          cat ca.crt
+          cat user.crt
         env:
           ca_crt: ${{ secrets.CA_CRT }}
           client_crt: ${{ secrets.USER_CRT }}
