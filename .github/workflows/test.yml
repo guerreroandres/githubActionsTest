@@ -39,13 +39,6 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Download a single artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: hello-world
-      - run: |
-          ls -l
-          pwd
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install OpenVPN
@@ -54,9 +47,6 @@ jobs:
           sudo apt install -y openvpn openvpn-systemd-resolved
           echo "$ca_crt" > ca.crt
           echo "$client_crt" > user.crt
-          echo ---> Current dir:
-          pwd
-          ls -l
         env:
           ca_crt: ${{ secrets.CA_CRT }}
           client_crt: ${{ secrets.USER_CRT }}
@@ -71,9 +61,13 @@ jobs:
       - name: Build something
         run: |
           ping -c 4 172.31.27.160
-          echo current dir again
-          pwd
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: hello-world
+      - run: |
           ls -l
+          pwd
       - name: copy file via ssh key
         uses: appleboy/scp-action@master
         with:
